@@ -20,7 +20,6 @@ additional_features = {
 
 @app.route('/predict', methods=['POST'])
 def predict_route():
-    print(request)
     data = request.json
     text = data.get('text')
     if not text:
