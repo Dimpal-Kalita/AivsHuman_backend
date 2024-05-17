@@ -1,8 +1,9 @@
 from flask import Flask, request, jsonify
 from model import make_prediction
-
+from flask_cors import CORS
 app = Flask(__name__)
 
+CORS(app)
 additional_features = {
     'feature1': 0,
     'feature2': 0,
@@ -19,6 +20,7 @@ additional_features = {
 
 @app.route('/predict', methods=['POST'])
 def predict_route():
+    print(request)
     data = request.json
     text = data.get('text')
     if not text:

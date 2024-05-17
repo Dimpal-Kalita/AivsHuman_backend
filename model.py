@@ -39,7 +39,7 @@ def make_prediction(text, additional_features=None):
     if additional_features is None or len(additional_features) != 9:
         return jsonify({'error': 'Missing or incorrect additional features'}), 400
     
-
+    # load the model with a asyc call
     try:
         loaded_model = keras.models.load_model(model_path)
     except:
