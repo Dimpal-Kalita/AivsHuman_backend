@@ -32,7 +32,6 @@ def preprocess_additional_features(features):
     return additional_input
 
 model_path = 'classification_model2.h5'
-loaded_model = keras.models.load_model(model_path)
 
 def make_prediction(text, additional_features=None):
     if text is None:
@@ -40,6 +39,11 @@ def make_prediction(text, additional_features=None):
     if additional_features is None or len(additional_features) != 9:
         return jsonify({'error': 'Missing or incorrect additional features'}), 400
     
+
+    try:
+        loaded_model = keras.models.load_model(model_path)
+    except:
+        return jsonify({'error': 'Model not found'}), 500
     # Preprocess text and additional features
     preprocessed_text = preprocess_text(text)
     preprocessed_features = preprocess_additional_features(additional_features)
